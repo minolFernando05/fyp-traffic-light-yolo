@@ -16,3 +16,9 @@ videos/
 
 # VS Code
 .vscode/
+
+# SUMO files
+sumo/output/
+*.tripinfo.xml
+*.queue.xml
+*.log
