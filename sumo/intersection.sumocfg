@@ -1,0 +1,15 @@
+<configuration>
+    <input>
+        <net-file value="net/intersection.net.xml"/>
+        <route-files value="routes/routes.rou.xml"/>
+    </input>
+
+    <time>
+        <begin value="0"/>
+        <end value="900"/>
+    </time>
+
+    <output>
+        <summary-output value="output/summary.xml"/>
+    </output>
+</configuration>
