@@ -1,32 +1,62 @@
 <routes>
 
-    <!-- ================= VEHICLE TYPES ================= -->
-
+    <!-- Vehicle Types -->
     <vType id="car" accel="2.6" decel="4.5" length="5" maxSpeed="13.9" />
     <vType id="bike" accel="3.0" decel="5.0" length="2" maxSpeed="11.1" />
     <vType id="bus" accel="1.3" decel="4.0" length="12" maxSpeed="11.1" />
     <vType id="ambulance" accel="3.5" decel="6.0" length="6" maxSpeed="16.7" color="1,0,0"/>
 
-    <!-- ================= ROUTES ================= -->
+    <!-- ================= ROUTES (Straight + Left + Right) ================= -->
+    <!-- From NORTH -->
+    <route id="N_to_S" edges="north_in south_out"/>  <!-- straight -->
+    <route id="N_to_E" edges="north_in east_out"/>   <!-- right/left depending on your map -->
+    <route id="N_to_W" edges="north_in west_out"/>
 
-    <!-- Replace edge IDs if yours are different -->
-    <route id="north_south" edges="north_in south_out"/>
-    <route id="south_north" edges="south_in north_out"/>
-    <route id="east_west" edges="east_in west_out"/>
-    <route id="west_east" edges="west_in east_out"/>
+    <!-- From SOUTH -->
+    <route id="S_to_N" edges="south_in north_out"/>
+    <route id="S_to_E" edges="south_in east_out"/>
+    <route id="S_to_W" edges="south_in west_out"/>
 
-    <!-- ================= TRAFFIC FLOWS ================= -->
+    <!-- From EAST -->
+    <route id="E_to_W" edges="east_in west_out"/>
+    <route id="E_to_N" edges="east_in north_out"/>
+    <route id="E_to_S" edges="east_in south_out"/>
 
-    <!-- Cars -->
-    <flow id="cars_ns" type="car" route="north_south" begin="0" end="900" vehsPerHour="600"/>
-    <flow id="cars_sn" type="car" route="south_north" begin="0" end="900" vehsPerHour="600"/>
-    <flow id="cars_ew" type="car" route="east_west"  begin="0" end="900" vehsPerHour="500"/>
-    <flow id="cars_we" type="car" route="west_east"  begin="0" end="900" vehsPerHour="500"/>
+    <!-- From WEST -->
+    <route id="W_to_E" edges="west_in east_out"/>
+    <route id="W_to_N" edges="west_in north_out"/>
+    <route id="W_to_S" edges="west_in south_out"/>
 
-    <!-- Bikes -->
-    <flow id="bikes_ns" type="bike" route="north_south" begin="0" end="900" vehsPerHour="300"/>
+    <!-- ================= FLOWS (split by % turns) ================= -->
+    <!-- Example split: 70% straight, 15% left, 15% right -->
+    <!-- Adjust these numbers later based on what you want -->
 
-    <!-- Buses -->
-    <flow id="bus_ew" type="bus" route="east_west" begin="0" end="900" vehsPerHour="60"/>
+    <!-- Cars from NORTH total 300/h -->
+    <flow id="car_N_straight" type="car" route="N_to_S" begin="0" end="900" vehsPerHour="210"/>
+    <flow id="car_N_turn1"    type="car" route="N_to_E" begin="0" end="900" vehsPerHour="45"/>
+    <flow id="car_N_turn2"    type="car" route="N_to_W" begin="0" end="900" vehsPerHour="45"/>
+
+    <!-- Cars from SOUTH total 300/h -->
+    <flow id="car_S_straight" type="car" route="S_to_N" begin="0" end="900" vehsPerHour="210"/>
+    <flow id="car_S_turn1"    type="car" route="S_to_E" begin="0" end="900" vehsPerHour="45"/>
+    <flow id="car_S_turn2"    type="car" route="S_to_W" begin="0" end="900" vehsPerHour="45"/>
+
+    <!-- Cars from EAST total 300/h -->
+    <flow id="car_E_straight" type="car" route="E_to_W" begin="0" end="900" vehsPerHour="210"/>
+    <flow id="car_E_turn1"    type="car" route="E_to_N" begin="0" end="900" vehsPerHour="45"/>
+    <flow id="car_E_turn2"    type="car" route="E_to_S" begin="0" end="900" vehsPerHour="45"/>
+
+    <!-- Cars from WEST total 300/h -->
+    <flow id="car_W_straight" type="car" route="W_to_E" begin="0" end="900" vehsPerHour="210"/>
+    <flow id="car_W_turn1"    type="car" route="W_to_N" begin="0" end="900" vehsPerHour="45"/>
+    <flow id="car_W_turn2"    type="car" route="W_to_S" begin="0" end="900" vehsPerHour="45"/>
+
+    <!-- Bikes (optional, lighter) -->
+    <flow id="bike_N" type="bike" route="N_to_S" begin="0" end="900" vehsPerHour="120"/>
+    <flow id="bike_S" type="bike" route="S_to_N" begin="0" end="900" vehsPerHour="120"/>
+
+    <!-- Buses (optional, low) -->
+    <flow id="bus_E" type="bus" route="E_to_W" begin="0" end="900" vehsPerHour="30"/>
+    <flow id="bus_W" type="bus" route="W_to_E" begin="0" end="900" vehsPerHour="30"/>
 
 </routes>

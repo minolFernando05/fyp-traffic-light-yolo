@@ -9,6 +9,10 @@
         <end value="900"/>
     </time>
 
+    <processing>
+        <time-to-teleport value="-1"/>
+     </processing>
+
     <output>
         <summary-output value="output/summary.xml"/>
     </output>
