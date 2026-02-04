@@ -22,3 +22,8 @@ sumo/output/
 *.tripinfo.xml
 *.queue.xml
 *.log
+
+# Ignore everything in yolov8n except trained weights you care about
+week1/yolov8n/*
+!week1/yolov8n/*.pt
+!week1/yolov8n/README.md

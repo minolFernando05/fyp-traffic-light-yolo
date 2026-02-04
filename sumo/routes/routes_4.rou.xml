@@ -1,0 +1,113 @@
+<routes>
+
+    <!-- Vehicle Types -->
+    <!-- Passenger Car -->
+    <vType id="car" accel="1.4" decel="2.5" emergencyDecel="5.0" length="4.5" minGap="2.0" maxSpeed="13.9" tau="1.0" sigma="0.3" carFollowModel="Krauss"/>  // max speed 50 km/h
+    <!-- Motorcycle -->
+    <vType id="bike" accel="1.8" decel="3.0" emergencyDecel="6.0" length="2.0" minGap="1.0" maxSpeed="11.1" tau="1.0" sigma="0.35" carFollowModel="Krauss"/> // max speed 40 km/h
+    <!-- City Bus -->
+    <vType id="bus" accel="0.9" decel="2.0" emergencyDecel="4.0" length="12.0" minGap="2.5" maxSpeed="11.1" tau="1.2" sigma="0.25" carFollowModel="Krauss"/>
+    <!-- <vType id="ambulance" accel="3.5" decel="6.0" length="6" maxSpeed="16.7" color="1,0,0"/> -->
+    <!-- <vType id="ambulance" vClass="emergency" accel="2.5" decel="4.5" length="5.0" maxSpeed="25" guiShape="emergency" color="1,0,0"/> -->
+    <!-- Ambulance (urban emergency response) -->
+    <vType id="ambulance" vClass="emergency" accel="2.0" decel="3.2" emergencyDecel="6.5" length="5.0" minGap="1.5" maxSpeed="22.2" tau="1.0" sigma="0.2" guiShape="emergency" color="1,0,0" carFollowModel="Krauss"/>
+
+
+    <!-- ================= ROUTES (Straight + Left + Right) ================= -->
+    <!-- From NORTH -->
+    <route id="N_to_S" edges="north_in south_out"/>  <!-- straight -->
+    <route id="N_to_E" edges="north_in east_out"/>   <!-- right/left depending on your map -->
+    <route id="N_to_W" edges="north_in west_out"/>
+
+    <!-- From SOUTH -->
+    <route id="S_to_N" edges="south_in north_out"/>
+    <route id="S_to_E" edges="south_in east_out"/>
+    <route id="S_to_W" edges="south_in west_out"/>
+
+    <!-- From EAST -->
+    <route id="E_to_W" edges="east_in west_out"/>
+    <route id="E_to_N" edges="east_in north_out"/>
+    <route id="E_to_S" edges="east_in south_out"/>
+
+    <!-- From WEST -->
+    <route id="W_to_E" edges="west_in east_out"/>
+    <route id="W_to_N" edges="west_in north_out"/>
+    <route id="W_to_S" edges="west_in south_out"/>
+
+    <!-- ================= FLOWS (split by % turns) ================= -->
+    <!-- Example split: 70% straight, 15% left, 15% right -->
+    <!-- Adjust these numbers later based on what you want -->
+
+<!-- ================= FLOWS (N/S high, E/W low) ================= -->
+
+<!-- ================= FLOWS (MAIN ROAD N/S very high, SIDE ROAD E/W very low) ================= -->
+
+<!-- ===== NORTH (MAIN ROAD) total 1200 cars/hour ===== -->
+<flow id="car_N_straight" type="car" route="N_to_S" begin="0" end="900" vehsPerHour="500"/>
+<flow id="car_N_turnE"    type="car" route="N_to_E" begin="0" end="900" vehsPerHour="50"/>
+<flow id="car_N_turnW"    type="car" route="N_to_W" begin="0" end="900" vehsPerHour="50"/>
+
+<!-- Bikes NORTH (main road moderate-high) -->
+<flow id="bike_N" type="bike" route="N_to_S" begin="0" end="900" vehsPerHour="450"/>
+
+<!-- Bus NORTH (urban) -->
+<flow id="bus_N" type="bus" route="N_to_S" begin="0" end="900" vehsPerHour="40"/>
+
+
+<!-- ===== SOUTH (MAIN ROAD) total 1200 cars/hour ===== -->
+<flow id="car_S_straight" type="car" route="S_to_N" begin="0" end="900" vehsPerHour="500"/>
+<flow id="car_S_turnE"    type="car" route="S_to_E" begin="0" end="900" vehsPerHour="50"/>
+<flow id="car_S_turnW"    type="car" route="S_to_W" begin="0" end="900" vehsPerHour="50"/>
+
+<!-- Bikes SOUTH (main road moderate-high) -->
+<flow id="bike_S" type="bike" route="S_to_N" begin="0" end="900" vehsPerHour="450"/>
+
+<!-- Bus SOUTH (urban) -->
+<flow id="bus_S" type="bus" route="S_to_N" begin="0" end="900" vehsPerHour="40"/>
+
+
+<!-- ===== EAST (SIDE ROAD) total 60 cars/hour ===== -->
+<flow id="car_E_straight" type="car" route="E_to_W" begin="0" end="900" vehsPerHour="42"/>
+<flow id="car_E_turnN"    type="car" route="E_to_N" begin="0" end="900" vehsPerHour="9"/>
+<flow id="car_E_turnS"    type="car" route="E_to_S" begin="0" end="900" vehsPerHour="9"/>
+
+<!-- Bikes EAST (low) -->
+<flow id="bike_E" type="bike" route="E_to_W" begin="0" end="900" vehsPerHour="40"/>
+
+<!-- Bus EAST (very low) -->
+<flow id="bus_E" type="bus" route="E_to_W" begin="0" end="900" vehsPerHour="8"/>
+
+
+<!-- ===== WEST (SIDE ROAD) total 60 cars/hour ===== -->
+<flow id="car_W_straight" type="car" route="W_to_E" begin="0" end="900" vehsPerHour="42"/>
+<flow id="car_W_turnN"    type="car" route="W_to_N" begin="0" end="900" vehsPerHour="9"/>
+<flow id="car_W_turnS"    type="car" route="W_to_S" begin="0" end="900" vehsPerHour="9"/>
+
+<!-- Bikes WEST (low) -->
+<flow id="bike_W" type="bike" route="W_to_E" begin="0" end="900" vehsPerHour="40"/>
+
+<!-- Bus WEST (very low) -->
+<flow id="bus_W" type="bus" route="W_to_E" begin="0" end="900" vehsPerHour="8"/>
+
+
+    <!-- Ambulances (emergency vehicles) -->
+    <flow id="amb_1" type="ambulance" route="W_to_E" begin="10" end="900" vehsPerHour="10"/>    
+    <flow id="amb_2" type="ambulance" route="N_to_S" begin="100" end="900" vehsPerHour="20"/>
+    <flow id="amb_3" type="ambulance" route="S_to_E" begin="150" end="900" vehsPerHour="10"/> 
+    <flow id="amb_4" type="ambulance" route="N_to_W" begin="200" end="900" vehsPerHour="20"/>
+
+
+
+
+    <!-- <vehicle id="amb1" type="ambulance" route="N_to_S" depart="80" departSpeed="max"/>
+    <vehicle id="amb2" type="ambulance" route="E_to_W" depart="120" departSpeed="max"/>
+    <vehicle id="amb3" type="ambulance" route="S_to_N" depart="160" departSpeed="max"/>
+    <vehicle id="amb4" type="ambulance" route="W_to_E" depart="200" departSpeed="max"/> -->
+
+
+
+</routes>
+
+
+
+

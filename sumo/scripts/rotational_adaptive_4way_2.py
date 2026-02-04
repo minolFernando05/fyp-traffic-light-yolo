@@ -17,7 +17,7 @@ SIM_SECONDS = 900
 OUT_CSV = BASE_DIR / "output" / "rotational_adaptive_4way_metrics.csv"
 
 # ====== ADJUST HERE ======
-USE_GUI = False
+USE_GUI = True
 G_MIN = 10
 G_MAX = 35
 GAP_TIME = 3       # seconds of empty queue before ending green early
