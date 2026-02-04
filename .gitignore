@@ -1,27 +1,63 @@
+# =========================
 # Python
+# =========================
 __pycache__/
 *.pyc
+*.pyo
 
-# Conda / venv
+# =========================
+# Virtual environments
+# =========================
 .env
-.venv
+.venv/
+venv/
 
+# =========================
+# ML datasets (DO NOT COMMIT)
+# =========================
+ambulance_training/data/raw/
+ambulance_training/data/roboflow_export/
+ambulance_training/data/**/*.jpg
+ambulance_training/data/**/*.png
+
+# =========================
+# YOLO training outputs
+# =========================
+ambulance_training/runs/
+week1/runs/
+runs/
+
+# =========================
+# Models (keep only final weights)
+# =========================
+ambulance_training/models/*.onnx
+ambulance_training/models/*.engine
+ambulance_training/models/*.ncnn
+
+# Allow final trained PyTorch weights
+!ambulance_training/models/ambulance_best.pt
+
+# =========================
 # Videos & large files
+# =========================
 *.mp4
 *.avi
 videos/
 
-# OS files
-.DS_Store
-
-# VS Code
-.vscode/
-
-# SUMO files
+# =========================
+# SUMO outputs
+# =========================
 sumo/output/
 *.tripinfo.xml
 *.queue.xml
 *.log
+
+# =========================
+# Editors / OS
+# =========================
+.vscode/
+.DS_Store
+
 
 # Ignore everything in yolov8n except trained weights you care about
 week1/yolov8n/*
